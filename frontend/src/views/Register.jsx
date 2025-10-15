@@ -45,62 +45,98 @@ export default function Register() {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Card style={{ width: "400px" }} className="shadow-sm p-4">
-        <h3 className="text-center mb-4 fw-bold">REGISTER</h3>
+    <Container
+      fluid
+      className="d-flex justify-content-center align-items-center vh-100 bg-light"
+    >
+      <Card
+        className="shadow-lg border-0 p-4"
+        style={{
+          width: "100%",
+          maxWidth: "450px",
+          borderRadius: "12px",
+          backgroundColor: "#ffffff",
+        }}
+      >
+        <Card.Body className="p-3">
+          <h3 className="text-center mb-5 fw-bold text-primary">REGISTER</h3>
 
-        {error && <Alert variant="danger">{error}</Alert>}
-        {success && <Alert variant="success">{success}</Alert>}
+          {error && <Alert variant="danger" className="mb-3">{error}</Alert>}
+          {success && <Alert variant="success" className="mb-3">{success}</Alert>}
 
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Nama Lengkap</Form.Label>
-            <Form.Control
-              type="text"
-              name="nama"
-              value={form.nama}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+          <Form onSubmit={handleSubmit}>
+            <div className="d-flex align-items-center mb-3">
+              <Form.Label className="fw-semibold me-3" style={{ width: "100px", flexShrink: 0 }}>
+                Nama:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="nama"
+                placeholder="Masukkan nama lengkap"
+                value={form.nama}
+                onChange={handleChange}
+                required
+                style={{ width: "100%" }}
+              />
+            </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <div className="d-flex align-items-center mb-3">
+              <Form.Label className="fw-semibold me-3" style={{ width: "100px", flexShrink: 0 }}>
+                Email:
+              </Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Masukkan email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                style={{ width: "100%" }}
+              />
+            </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <div className="d-flex align-items-center mb-3">
+              <Form.Label className="fw-semibold me-3" style={{ width: "100px", flexShrink: 0 }}>
+                Username:
+              </Form.Label>
+              <Form.Control
+                type="text"
+                name="username"
+                placeholder="Masukkan username"
+                value={form.username}
+                onChange={handleChange}
+                required
+                style={{ width: "100%" }}
+              />
+            </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+            <div className="d-flex align-items-center mb-4">
+              <Form.Label className="fw-semibold me-3" style={{ width: "100px", flexShrink: 0 }}>
+                Password:
+              </Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Masukkan password"
+                value={form.password}
+                onChange={handleChange}
+                required
+                style={{ width: "100%" }}
+              />
+            </div>
 
-          <Button type="submit" variant="primary" className="w-100" disabled={loading}>
-            {loading ? <Spinner animation="border" size="sm" /> : "Register"}
-          </Button>
-        </Form>
+            <div className="d-flex justify-content-center gap-3 mt-4">
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={loading}
+                className="px-5 fw-semibold"
+              >
+                {loading ? <Spinner animation="border" size="sm" /> : "Registrasi"}
+              </Button>
+            </div>
+          </Form>
+        </Card.Body>
       </Card>
     </Container>
   );
