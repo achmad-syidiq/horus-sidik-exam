@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "../views/Login";
 import Register from "../views/Register";
 import Dashboard from "../views/Dashboard";
+import UpdateUser from "../views/UpdateUser";
 import { AuthProvider } from "../store/AuthProvider";
 import { useAuth } from "../store/useAuth";
-
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -39,6 +39,14 @@ export default function AppRouter() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/update-user"
+            element={
+              <ProtectedRoute>
+                <UpdateUser />
               </ProtectedRoute>
             }
           />
