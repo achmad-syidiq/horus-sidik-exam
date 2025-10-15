@@ -70,26 +70,48 @@ export default function Dashboard() {
   );
 
   return (
-    <Container className="mt-4">
-      <Card className="p-4 shadow-sm">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h4>Dashboard</h4>
-          <Button variant="secondary" onClick={logout}>
-            Logout
-          </Button>
-        </div>
-
-        {error && <Alert variant="danger">{error}</Alert>}
-
-        <SearchBar onSearch={(keyword) => setSearch(keyword)} />
-
-        {loading ? (
-          <div className="text-center py-4">
-            <Spinner animation="border" />
+    <Container
+      fluid
+      className="d-flex justify-content-center align-items-start vh-100 bg-light py-4"
+    >
+      <Card
+        className="shadow-lg border-0 p-4"
+        style={{
+          width: "100%",
+          maxWidth: "800px",
+          borderRadius: "12px",
+          backgroundColor: "#ffffff",
+        }}
+      >
+        <Card.Body className="p-3">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h4 className="fw-bold text-primary">DASHBOARD PENGGUNA</h4>
+            </div>
+            <Button 
+              variant="outline-secondary" 
+              onClick={logout}
+              className="fw-semibold"
+            >
+              Logout
+            </Button>
           </div>
-        ) : (
-          <UserTable users={filteredUsers} onEdit={handleEdit} onDelete={handleDelete} />
-        )}
+
+          {error && <Alert variant="danger" className="mb-3">{error}</Alert>}
+
+          <div className="mb-4">
+            <SearchBar onSearch={(keyword) => setSearch(keyword)} />
+          </div>
+
+          {loading ? (
+            <div className="text-center py-5">
+              <Spinner animation="border" variant="primary" />
+              <p className="mt-2 text-muted">Memuat data pengguna...</p>
+            </div>
+          ) : (
+            <UserTable users={filteredUsers} onEdit={handleEdit} onDelete={handleDelete} />
+          )}
+        </Card.Body>
       </Card>
     </Container>
   );

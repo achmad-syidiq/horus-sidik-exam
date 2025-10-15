@@ -9,14 +9,19 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <InputGroup className="mb-3">
+    <InputGroup className="mb-3" style={{ maxWidth: "100%" }}>
       <Form.Control
         type="text"
         placeholder="Cari berdasarkan nama atau username..."
         value={tempValue}
         onChange={(e) => setTempValue(e.target.value)}
+        className="border-end-0"
       />
-      <Button variant="primary" onClick={handleSearch}>
+      <Button 
+        variant="primary" 
+        onClick={handleSearch}
+        className="fw-semibold"
+      >
         Cari
       </Button>
     </InputGroup>
