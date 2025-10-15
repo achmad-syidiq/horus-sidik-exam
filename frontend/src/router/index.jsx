@@ -1,24 +1,52 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "../views/Login";
-import { useAuth } from "../store/AuthProvider";
+import Register from "../views/Register";
+import Dashboard from "../views/Dashboard";
+import { AuthProvider } from "../store/AuthProvider";
+import { useAuth } from "../store/useAuth";
 
-// ProtectedRoute untuk proteksi halaman dashboard
-const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn, loading } = useAuth();
 
-  if (loading) return null; // bisa diganti spinner
-  if (!isLoggedIn) return <Navigate to="/login" replace />;
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-gray-600 text-lg">Memuat...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return children;
-};
-
+}
 export default function AppRouter() {
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<Login />} />
-     
-    </Routes>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* Protected Routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Default Redirect */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }

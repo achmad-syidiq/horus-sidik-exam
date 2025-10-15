@@ -71,7 +71,7 @@ def login():
         return jsonify({"message": "Username atau password salah"}), 401
 
     # Create JWT token (valid 1 day)
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return jsonify({
         "access_token": access_token,
         "user": user.to_dict()
@@ -83,11 +83,16 @@ def login():
 @users_bp.route("/users", methods=["GET"])
 @jwt_required()
 def get_users():
-    """
-    Return list of all users (exclude password). Protected route.
-    """
     users = User.query.all()
-    data = [user.to_dict() for user in users]
+    data = [
+        {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "nama": user.nama
+        }
+        for user in users
+    ]
     return jsonify(data), 200
 
 # ----------------------------

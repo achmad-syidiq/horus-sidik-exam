@@ -1,13 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App";
+import AppRouter from "./router";
 import { AuthProvider } from "./store/AuthProvider";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <AppRouter />
   </React.StrictMode>
 );

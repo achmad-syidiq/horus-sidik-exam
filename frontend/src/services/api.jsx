@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000", // sesuaikan dengan backend
+  baseURL: "http://localhost:5000", 
 });
 
 // Tambahkan token otomatis kalau ada
