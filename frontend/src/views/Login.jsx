@@ -30,8 +30,8 @@ export default function Login() {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Card style={{ width: "380px" }} className="shadow-sm p-4">
+    <Container className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <Card style={{ width: "400px" }} className="shadow-sm p-4">
         <h3 className="text-center mb-4 fw-bold">LOGIN</h3>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
@@ -45,6 +45,7 @@ export default function Login() {
               required
             />
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -55,9 +56,20 @@ export default function Login() {
               required
             />
           </Form.Group>
-          <Button type="submit" variant="primary" className="w-100">
-            {loading ? <Spinner animation="border" size="sm" /> : "Login"}
-          </Button>
+
+          <div className="d-flex justify-content-between">
+            <Button type="submit" variant="primary" disabled={loading} className="px-4">
+              {loading ? <Spinner animation="border" size="sm" /> : "Login"}
+            </Button>
+            <Button
+              variant="outline-secondary"
+              type="button"
+              className="px-3"
+              onClick={() => navigate("/register")}
+            >
+              Registrasi
+            </Button>
+          </div>
         </Form>
       </Card>
     </Container>
