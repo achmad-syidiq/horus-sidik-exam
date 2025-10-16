@@ -4,7 +4,7 @@ Represents the users table in the database with proper constraints and methods.
 """
 
 from app.extensions import db
-from datetime import datetime
+from datetime import datetime, timezone
 import bcrypt
 
 
@@ -64,7 +64,7 @@ class User(db.Model):
     # Timestamps
     created_at = db.Column(
         db.DateTime, 
-        default=datetime.utcnow,
+        default=datetime.now(timezone.utc),
         nullable=False,
         comment='Timestamp of user creation, defaults to current time'
     )
